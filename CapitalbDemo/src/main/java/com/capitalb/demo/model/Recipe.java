@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
@@ -28,13 +29,22 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-@Table(name="Ingredient")
+@Table(name="Recipe")
+@TableGenerator( 
+		name = "RecipeIdGenerator",
+		table = "sequence_table",
+		pkColumnName = "generatorName",
+		pkColumnValue = "RecipeIdGenerator",
+		valueColumnName = "generatorValue",
+		initialValue = 100001,
+		allocationSize = 1 
+	)
 public class Recipe implements Serializable {
 	
 	private static final long serialVersionUID = -6059703463574434976L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="RecipeIdGenerator")
 	private Long id;
 
 	@Column
@@ -44,7 +54,7 @@ public class Recipe implements Serializable {
 	@Column
 	private String method;
 	
-	@OneToMany(cascade= {CascadeType.DETACH}, fetch=FetchType.LAZY)
+	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
 	private List<Ingredient> ingredients;
 	
 	@Column(updatable = false, nullable = false)

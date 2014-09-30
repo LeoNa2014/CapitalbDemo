@@ -7,12 +7,22 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capitalb.demo.model.Recipe;
 
+/**
+ * Recipe Data Access Object
+ * 
+ * Please Note: {@link @Transactional} could be marked in service layer 
+ * to control propagation level, which will override the transaction 
+ * propagation in DAO layer
+ * 
+ * 
+ * @author Leo Na
+ */
 @Repository
 @Transactional
 public class RecipeDAO {
@@ -32,8 +42,24 @@ public class RecipeDAO {
 		return entityManager.find ( Recipe.class, id );
 	}
 	
+	@Transactional(readOnly=false)
 	public void register( Recipe recipe) {
 		entityManager.persist( recipe );
         return;
+    }
+	
+	@Transactional(readOnly=false)
+	public void remove( Recipe recipe ) {
+		this.remove( recipe.getId() );
+    }
+	
+	@Transactional(readOnly=false)
+	public void remove( Long id ) {
+		Recipe persistentRecipe = this.getById( id );
+		if ( persistentRecipe == null ) {
+			/* error message should be generated here*/
+			return;
+		}
+		entityManager.remove( persistentRecipe );
     }
 }

@@ -12,7 +12,7 @@
 		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
 		<org.hibernate.version>4.3.6.Final</org.hibernate.version>
 		<org.hibernate.c3p0.version>4.2.3.Final</org.hibernate.c3p0.version>
-		<c3p0.version>0.9.1.2</c3p0.version>
+		<mchange.c3p0.version>0.9.5-pre3</mchange.c3p0.version>
 		<mysql.driver.version>5.1.33</mysql.driver.version>
 		<junit.version>4.7</junit.version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
+			<version>${log4j.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -127,11 +127,11 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.0-api</artifactId>
 		    <version>1.0.1.Final</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- JSR-303 (Bean Validation) Implementation -->
 	    <!-- Provides portable constraints such as @Email -->
@@ -155,10 +155,11 @@
 			<version>${org.hibernate.version}</version>
 		</dependency>
 
+		<!-- c3p0 (non-hibernate dependancy) -->
 		<dependency>
-			<groupId>c3p0</groupId>
+			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>${c3p0.version}</version>
+			<version>${mchange.c3p0.version}</version>
 		</dependency>
 		
 		<dependency>
