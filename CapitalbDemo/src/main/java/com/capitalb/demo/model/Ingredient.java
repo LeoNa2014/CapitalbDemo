@@ -10,8 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Ingredient
@@ -26,9 +29,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 		pkColumnName = "generatorName",
 		pkColumnValue = "IngredientIdGenerator",
 		valueColumnName = "generatorValue",
-		initialValue = 100001,
+		initialValue = 1,
 		allocationSize = 1 
 	)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ingredient implements Serializable {
 
 	private static final long serialVersionUID = 1695076438554922869L;
@@ -37,7 +41,9 @@ public class Ingredient implements Serializable {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="IngredientIdGenerator")
 	private Long id;
 
-	@Column(nullable = false, unique=true)
+	@NotBlank
+	@NotEmpty
+	@Column(nullable = false)
 	private String name;
 
 	public Long getId() {

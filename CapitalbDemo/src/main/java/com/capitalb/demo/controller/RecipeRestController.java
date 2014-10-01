@@ -3,11 +3,15 @@ package com.capitalb.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.capitalb.demo.model.Recipe;
 import com.capitalb.demo.service.RecipeService;
@@ -23,14 +27,33 @@ public class RecipeRestController {
 
 	@Autowired
 	private RecipeService recipeService;
-	
-	@RequestMapping(value="/all",  method=RequestMethod.GET, produces="application/json")
-    public @ResponseBody List<Recipe> listAllRecipes(){
-        return recipeService.getAll();
-    }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces="application/json")
-    public @ResponseBody Recipe getRecipeById( @PathVariable("id") Long id ) {
-        return recipeService.getById( id );
-    }
+	@RequestMapping(value="/all",  method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Recipe> getAllRecipes(){
+		return recipeService.getAll();
+	}
+
+	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Recipe getRecipeById( @PathVariable("id") Long id ) {
+		Recipe recipe = recipeService.getById( id );
+		if ( recipe == null )
+			throw new RecipeNotFoundException( id );
+		return recipe;
+	}
+
+	@RequestMapping(value="/new", method=RequestMethod.POST, produces=MediaType.TEXT_PLAIN_VALUE)
+	public @ResponseBody String registerNewRecipe( @RequestBody Recipe newRecipe ) {
+
+		recipeService.register( newRecipe );
+		return "{\"message\":\"Recipe has been created\"}";
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public class RecipeNotFoundException extends RuntimeException {
+		private static final long serialVersionUID = -8326787809556557515L;
+
+		public RecipeNotFoundException( Long id ) {
+			super( "Recipe (" + id + ") not found." );
+		}
+	}
 }

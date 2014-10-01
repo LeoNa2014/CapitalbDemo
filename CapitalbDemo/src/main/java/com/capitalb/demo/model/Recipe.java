@@ -20,8 +20,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Recipe
@@ -36,9 +38,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 		pkColumnName = "generatorName",
 		pkColumnValue = "RecipeIdGenerator",
 		valueColumnName = "generatorValue",
-		initialValue = 100001,
+		initialValue = 1,
 		allocationSize = 1 
 	)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Recipe implements Serializable {
 	
 	private static final long serialVersionUID = -6059703463574434976L;
@@ -47,14 +50,16 @@ public class Recipe implements Serializable {
 	@GeneratedValue(strategy=GenerationType.TABLE, generator="RecipeIdGenerator")
 	private Long id;
 
-	@Column
+	@NotBlank
+	@Column(nullable = false)
 	@Pattern(regexp = "[A-Za-z ]*", message = "must contain only letters and spaces")
 	private String name;
 	
-	@Column
+	@NotBlank
+	@Column(nullable = false)
 	private String method;
 	
-	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
+	@OneToMany(cascade= {CascadeType.ALL}, fetch=FetchType.EAGER)
 	private List<Ingredient> ingredients;
 	
 	@Column(updatable = false, nullable = false)

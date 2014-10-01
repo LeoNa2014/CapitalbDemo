@@ -14,6 +14,7 @@
 		<org.hibernate.c3p0.version>4.2.3.Final</org.hibernate.c3p0.version>
 		<mchange.c3p0.version>0.9.5-pre3</mchange.c3p0.version>
 		<mysql.driver.version>5.1.33</mysql.driver.version>
+		<org.codehaus.jackson.version>1.8.5</org.codehaus.jackson.version>
 		<junit.version>4.7</junit.version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<log4j.version>1.2.17</log4j.version>
@@ -178,6 +179,18 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.driver.version}</version>
+		</dependency>
+		
+		<!-- Jackson: Java to Json conversion -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${org.codehaus.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${org.codehaus.jackson.version}</version>
 		</dependency>
 	</dependencies>
     <build>

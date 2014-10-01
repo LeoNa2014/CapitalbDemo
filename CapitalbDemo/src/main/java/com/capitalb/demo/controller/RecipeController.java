@@ -32,7 +32,7 @@ public class RecipeController {
 		return "recipes";
 	}
 	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
+	@RequestMapping(value="/new", method=RequestMethod.POST)
     public String registerNewRecipe( Model model, 
     		@Valid @ModelAttribute("newRecipe") Recipe newRecipe, 
     		BindingResult result ) {
