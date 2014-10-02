@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	/* $(document).ready(function() {
+	$(document).ready(function() {
 		$("#ingredients").on("click focus", ".ingredient.inactive", function(e) {
 			var curRow = $(this);
 			curRow.clone().appendTo("#ingredients");
@@ -9,7 +9,7 @@
 			$(this).closest(".ingredient").remove();
 		});
 
-	}); */
+	});
 </script>
 <h4 class="muted">New Recipe</h4>
 <div class="alert alert-info" role="alert">{{message}}</div>
@@ -30,15 +30,12 @@
 	<div class="control-group">
 		<label class="control-label" for="recipeMethod">Ingredients:</label>
 		<div class="controls">
-			<textarea class="input-xlarge" ng-model="ingredientNames" ng-list="/\n/" ng-trim="true" rows="7"></textarea>
-			
-			<!-- TODO for LNA: Failed to multi-fields value in, need to do some more research -->
-			<!-- <div id="ingredients">
+			<div id="ingredients">
 				<div class="row-fluid ingredient inactive">
-					<input type="text" name="ingredientNames" ng-model="recipe.ingredients.name" >
+					<input class="input-xlarge ingredientName" type="text" >
 					<i class="fa fa-remove pointer hide"></i>
 				</div>
-			</div> -->
+			</div>
 			
 		</div>
 	</div>

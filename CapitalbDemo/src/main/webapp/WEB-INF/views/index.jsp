@@ -12,7 +12,6 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/>" >
 	</head>
-
 	<body>
 		<div class="container-narrow">
 			<h3 class="muted">Capitalb Demo Application - Leo Na</h3>
@@ -32,23 +31,15 @@
 	        	</div>
 	        </div>
 		</div>
-		<script type="text/javascript">
-		    var _contextPath = "${pageContext.request.contextPath}";
-		</script>
+		<script type="text/javascript"> var _contextPath = "${pageContext.request.contextPath}"; </script>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="<c:url value="/resources/bootstrap-2.3.2/js/bootstrap.js"/>"></script>
-		<!-- <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script> -->
-		<!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js"></script> -->
-		
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.js"></script>
-		
-		<%-- <script type="text/javascript" src="<c:url value="/resources/js/ui-bootstrap-tpls-0.9.0.min.js"/>"></script> --%>
-		<%-- <script type="text/javascript" src="<c:url value="/resources/js/spa_restful.js"/>"></script> --%>
 		<script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/service.js"/>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/controller.js"/>"></script>
 		
 	</body>
 </html>
