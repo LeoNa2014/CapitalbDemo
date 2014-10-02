@@ -12,7 +12,7 @@
 	});
 </script>
 <h4 class="muted">New Recipe</h4>
-<div class="alert alert-info" role="alert">{{message}}</div>
+<div class="alert alert-info" role="alert" ng-show="message.length">{{message}}</div>
 <form class="form-horizontal"role="form" ng-submit="createNewRecipe()">
 	<div class="control-group">
 		<label class="control-label" for="recipeName">Name:</label>
