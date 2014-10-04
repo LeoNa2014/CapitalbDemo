@@ -41,11 +41,20 @@ public class RecipeRestController {
 		return recipe;
 	}
 
-	@RequestMapping(value="/new", method=RequestMethod.POST, produces=MediaType.TEXT_PLAIN_VALUE)
+	@RequestMapping(value="/new", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String registerNewRecipe( @RequestBody Recipe newRecipe ) {
 
 		recipeService.register( newRecipe );
-		return "{\"message\":\"Recipe has been created\"}";
+		return "{\"message\":\"Recipe (" + newRecipe.getName() + ") has been created\"}";
+	}
+	
+	@RequestMapping(value="/remove/{id}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String removeRecipe( @PathVariable("id") Long id ) {
+		Recipe recipe = recipeService.getById( id );
+		if ( recipe == null )
+			throw new RecipeNotFoundException( id );
+		recipeService.remove( id );
+		return "{\"message\":\"Recipe (" + recipe.getName() + ") has been removed\"}";
 	}
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)

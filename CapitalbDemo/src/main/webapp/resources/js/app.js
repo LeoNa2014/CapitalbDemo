@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 /* Recipe App Module */
 
 var recipeApp = angular.module( "RecipeApp", [ "ngRoute", "ngResource" ] );
 
 recipeApp.config( function( $routeProvider ) {
-	$routeProvider.when("/newRecipe", {
+	$routeProvider.when( "/newRecipe", {
 		controller : "NewRecipeCtrl",
 		templateUrl : "templates/newRecipe.html"
-	}).when("/recipes", {
+	}).when( "/recipes", {
 		controller : "RecipesCtrl",
 		templateUrl : "templates/recipes.html"
 	}).otherwise({
@@ -16,6 +16,3 @@ recipeApp.config( function( $routeProvider ) {
 		templateUrl: "templates/home.html"
 	});
 });
-
-
-
